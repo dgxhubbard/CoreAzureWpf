@@ -16,17 +16,30 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
 
         <TextBlock Grid.Row="0" Margin="5" Text="Server Name" />
         <TextBox Grid.Row="1" Margin="5"  Text="{Binding ServerName}" />
 
-        <TextBlock Grid.Row="2" Margin="5" Text="Database Name" />
-        <TextBox Grid.Row="3" Margin="5" Text="{Binding DatabaseName}" />
+        <TextBlock Grid.Row="2" Margin="5" Text="User Name" />
+        <TextBox Grid.Row="3" Margin="5"  Text="{Binding UserName}" />
 
 
-        <Button Grid.Row="4" Width="75" Content="Create" Click="Button_Click" />
+        <TextBlock Grid.Row="4" Margin="5" Text="Password" />
+        <TextBox Grid.Row="5" Margin="5"  Text="{Binding Password}" />
+
+
+
+        <TextBlock Grid.Row="6" Margin="5" Text="Database Name" />
+        <TextBox Grid.Row="7" Margin="5" Text="{Binding DatabaseName}" />
+
+
+        <Button Grid.Row="8" Width="75" Content="Create" Click="Button_Click" />
 
 
     </Grid>

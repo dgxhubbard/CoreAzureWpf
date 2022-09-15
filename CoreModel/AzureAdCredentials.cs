@@ -39,7 +39,8 @@ namespace CoreModel
         //private static string Tenant = "common";
 
 
-        // single tenant
+        // single or mutil tenant
+        // if multi tenant set Tenant to common
         private static string ClientId = "ddc27399-ecf0-4f86-a926-aeecf45391cf";
         private static string Tenant = "79f3db43-b504-4ffd-ae1c-8325ff5b2156";
 

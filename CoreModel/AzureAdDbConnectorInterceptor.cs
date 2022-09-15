@@ -114,10 +114,12 @@ namespace CoreModel
             var connectionStringBuilder = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder ( connection.ConnectionString );
 
             var dataSource = connectionStringBuilder.DataSource;
+            var username = connectionStringBuilder.UserID;
 
             var contains = false;
 
-            if ( dataSource.Contains ( MsSqlConstants.AzureUrl, StringComparison.OrdinalIgnoreCase ) )
+            if ( dataSource.Contains ( MsSqlConstants.AzureUrl, StringComparison.OrdinalIgnoreCase ) &&
+                 string.IsNullOrEmpty ( username ) )
                 contains = true;
 
             return contains;

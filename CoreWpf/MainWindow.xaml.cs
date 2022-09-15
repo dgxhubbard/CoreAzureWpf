@@ -61,6 +61,34 @@ namespace CoreWpf
         }
 
 
+        string _userName;
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+            set
+            {
+                _userName = value;
+                NotifyPropertyChanged ( "UserName" );
+            }
+        }
+
+
+        string _password;
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                _password = value;
+                NotifyPropertyChanged ( "Password" );
+            }
+        }
 
 
 
@@ -80,6 +108,12 @@ namespace CoreWpf
 
             if ( !ServerName.EndsWith ( "database.windows.net" ) )
                 bldr.IntegratedSecurity = true;
+
+            if ( !string.IsNullOrEmpty( UserName ) && !string.IsNullOrEmpty( Password ) )
+            {
+                bldr.UserID = UserName;
+                bldr.Password = Password;
+            }
 
 
             var connectionString = bldr.ToString ();
