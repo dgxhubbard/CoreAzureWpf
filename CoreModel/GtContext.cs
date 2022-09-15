@@ -14,8 +14,6 @@ namespace CoreModel
 {
     public partial class GtContext : DbContext
     {
-        const string MsSqlConnectionString = @"Data Source=localhost;Initial Catalog=foo;Integrated Security=False;Persist Security Info=True;User ID=sa;Password=cccccc";
-        const string SqliteConnectionString = @"Data Source=C:\Repository\GtTask\AppFiles\foo.db3;Persist Security Info=False";
 
         public GtContext ()
         {}

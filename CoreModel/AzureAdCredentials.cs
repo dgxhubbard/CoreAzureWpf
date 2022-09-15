@@ -134,39 +134,6 @@ namespace CoreModel
             firstAccount = accountResult.Result.FirstOrDefault ();
 
 
-            /*
-            var signIn = 3;
-            switch ( signIn )
-            {
-                // 0: Use account used to signed-in in Windows (WAM)
-                case 0:
-                    // WAM will always get an account in the cache. So if we want
-                    // to have a chance to select the accounts interactively, we need to
-                    // force the non-account
-                    firstAccount = PublicClientApplication.OperatingSystemAccount;
-                    break;
-
-                //  1: Use one of the Accounts known by Windows(WAM)
-                case 1:
-                    // We force WAM to display the dialog with the accounts
-                    firstAccount = null;
-                    break;
-
-                //  Use any account(Azure AD). It's not using WAM
-                default:
-
-                    var accountResult = PublicClientApp.GetAccountsAsync ();
-                    if ( accountResult == null )
-                        throw new NullReferenceException ( "FAILED to get accounts" );
-
-                    accountResult.Wait ();
-
-                    firstAccount = accountResult.Result.FirstOrDefault ();
-
-                    break;
-            }
-            */
-
             if ( firstAccount == null )
             {
                 try

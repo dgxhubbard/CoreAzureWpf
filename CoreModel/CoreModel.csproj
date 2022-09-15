@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 	  <TargetFramework>net6.0-windows</TargetFramework>
-	  <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -47,6 +47,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Identity.Client" Version="4.46.2" />
+    <PackageReference Include="Microsoft.Identity.Client.Broker" Version="4.46.2-preview" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.6" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.20" />

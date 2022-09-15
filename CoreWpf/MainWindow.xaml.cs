@@ -78,8 +78,9 @@ namespace CoreWpf
             bldr.InitialCatalog = DatabaseName;
 
 
-            //bldr.UserID = "sa";
-            //bldr.Password = "cccccc";
+            if ( !ServerName.EndsWith ( "database.windows.net" ) )
+                bldr.IntegratedSecurity = true;
+
 
             var connectionString = bldr.ToString ();
 
