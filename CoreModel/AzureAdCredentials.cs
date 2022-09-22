@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Threading;
 
+
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Broker;
 
@@ -68,13 +70,29 @@ namespace CoreModel
 
         IPublicClientApplication _clientApp;
 
-        public IPublicClientApplication PublicClientApp 
-        { 
-            get { return _clientApp; } 
+        public IPublicClientApplication PublicClientApp
+        {
+            get { return _clientApp; }
         }
 
         public string AccessToken
         { get; private set; }
+
+
+        public Dictionary<string,string> TokenInfo
+        { get; private set; }
+
+
+        public DateTime IssuedAt
+        { get; private set; }
+
+
+        public DateTime NotBefore
+        { get; private set; }
+
+        public DateTime TokenExpires
+        { get; private set; }
+
 
         private static readonly string [] _azureSqlScopes =
                  new []
@@ -193,6 +211,40 @@ namespace CoreModel
                 {
                     Debug.WriteLine ( ex.Message );
                     return;
+                }
+
+                if ( AccessToken != null )
+                {
+                    TokenInfo = new Dictionary<string, string> ();
+
+                    var handler = new JwtSecurityTokenHandler ();
+                    var jwtSecurityToken = handler.ReadJwtToken ( AccessToken );
+
+                    var claims = jwtSecurityToken.Claims.ToList ();
+
+                    foreach ( var claim in claims )
+                    {
+                        if ( !TokenInfo.ContainsKey ( claim.Type) )
+                            TokenInfo.Add ( claim.Type, claim.Value );
+                    }
+
+                    var tokenExp = claims.First ( claim => claim.Type.Equals ( "exp" ) ).Value;
+                    var tokenTicks = long.Parse ( tokenExp );
+
+                    TokenExpires = DateTimeOffset.FromUnixTimeSeconds ( tokenTicks ).UtcDateTime;
+
+
+                    tokenExp = claims.First ( claim => claim.Type.Equals ( "nbf" ) ).Value;
+                    tokenTicks = long.Parse ( tokenExp );
+
+                    NotBefore = DateTimeOffset.FromUnixTimeSeconds ( tokenTicks ).UtcDateTime;
+
+
+                    tokenExp = claims.First ( claim => claim.Type.Equals ( "iat" ) ).Value;
+                    tokenTicks = long.Parse ( tokenExp );
+
+                    IssuedAt = DateTimeOffset.FromUnixTimeSeconds ( tokenTicks ).UtcDateTime;
+
                 }
             }
         }

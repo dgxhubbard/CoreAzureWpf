@@ -11,6 +11,9 @@ using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 
 using CoreModel;
+using CommonServiceLocator;
+using CoreModel.Interfaces;
+using Microsoft.Data.SqlClient;
 
 namespace CoreWpf
 {
@@ -140,7 +143,19 @@ namespace CoreWpf
 
 
 
+            var credentials = ServiceLocator.Current.GetInstance<IAzureAdCredentials> ();
+            if ( credentials == null )
+                throw new NullReferenceException ( "FAILED to get credentials" );
 
+            var connection = context.Database.GetDbConnection () as Microsoft.Data.SqlClient.SqlConnection;
+            if ( connection != null )
+            { 
+                if ( connection.AccessToken == credentials.AccessToken )
+                {
+                    var i = 0;
+                    i++;
+                }
+            }
 
 
 
